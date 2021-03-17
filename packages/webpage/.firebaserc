@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "fsp-demo-app": {
+      "hosting": {
+        "webpage": [
+          "fsp-demo-app"
+        ]
+      }
+    }
+  }
+}
