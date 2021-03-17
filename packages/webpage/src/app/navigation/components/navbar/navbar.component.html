@@ -1,0 +1,27 @@
+<mat-toolbar>
+  <div class="container">
+    <div class="row">
+      <div class="col d-flex justify-content-between">
+        <div>
+          fsp-demo-app
+        </div>
+        <div>
+          <button mat-button *ngIf="(user | async) as usr; else notLoggedIn" [matMenuTriggerFor]="userMenu">
+            {{usr.email}}
+          </button>
+          <ng-template #notLoggedIn>
+            <a mat-button routerLink="/auth/login">
+              Login
+            </a>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>
+
+<mat-menu #userMenu>
+  <ng-template matMenuContent>
+    <button mat-menu-item (click)="logout()">Sign Out</button>
+  </ng-template>
+</mat-menu>
