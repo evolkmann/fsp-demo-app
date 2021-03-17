@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
+import { MetaService } from '@ngx-meta/core';
 import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { FirebaseCollection } from 'src/app/firebase';
 import { Clinic } from '../../models/clinic.model';
 
@@ -17,7 +18,8 @@ export class ClinicDetailComponent implements OnInit {
 
   constructor(
     private readonly firestore: AngularFirestore,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly meta: MetaService
   ) { }
 
   ngOnInit(): void {
@@ -25,7 +27,8 @@ export class ClinicDetailComponent implements OnInit {
       map(params => params.id),
       switchMap(id => this.firestore.doc<Clinic>(`${FirebaseCollection.CLINICS}/${id}`).valueChanges({
         idField: 'id'
-      }))
+      })),
+      tap(clinic => this.meta.setTitle(`${clinic?.name} - Clinics`))
     );
   }
 
