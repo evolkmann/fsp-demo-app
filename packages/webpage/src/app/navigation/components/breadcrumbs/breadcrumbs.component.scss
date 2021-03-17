@@ -1,0 +1,10 @@
+.row {
+  color: #515151;
+
+  & span {
+    &:before {
+      content: '/';
+      padding: 0 .3rem;
+    }
+  }
+}

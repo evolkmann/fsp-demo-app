@@ -1,0 +1,10 @@
+<mat-card class="mb-3">
+  <mat-card-title>
+    {{clinic.name}}
+  </mat-card-title>
+  <mat-card-actions>
+    <a mat-button [routerLink]="'/clinics/' + clinic.id">
+      View Details
+    </a>
+  </mat-card-actions>
+</mat-card>

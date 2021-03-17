@@ -1,0 +1,10 @@
+<div class="container" *ngIf="clinic | async as cl">
+  <fsp-breadcrumbs base="Clinics" [id]="cl.id"></fsp-breadcrumbs>
+  <div class="row">
+    <div class="col">
+      <h1>
+        {{cl.name}}
+      </h1>
+    </div>
+  </div>
+</div>

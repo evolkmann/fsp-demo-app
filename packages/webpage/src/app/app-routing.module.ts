@@ -6,24 +6,6 @@ import { map } from 'rxjs/operators';
 
 export const NEXT_URL_PARAM = 'next';
 
-/**
- * https://stackoverflow.com/a/53429547
- */
-function getResolvedUrl(route: ActivatedRouteSnapshot): string {
-  let path = route.pathFromRoot
-    .map(v => v.url.map(segment => segment.toString()).join('/'))
-    .join('/');
-
-  if (Object.keys(route.queryParamMap).length) {
-    path += '?';
-  }
-  for (const key in route.queryParams) {
-    path += `${key}=${route.queryParams[key]}&`;
-  }
-
-  return path;
-}
-
 export const redirectUnauthorizedToLogin: (redirect: ActivatedRouteSnapshot) => AuthPipe =
   (redirect) => pipe(
     loggedIn,
@@ -32,7 +14,8 @@ export const redirectUnauthorizedToLogin: (redirect: ActivatedRouteSnapshot) => 
         return true;
       }
 
-      const next = encodeURIComponent(getResolvedUrl(redirect));
+      const url = (redirect as any)?._routerState?.url || '/';
+      const next = encodeURIComponent(url);
       return `/auth/login?${NEXT_URL_PARAM}=${next}`;
     })
   );
@@ -43,14 +26,19 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   {
-    path: 'secure',
-    loadChildren: () => import('./secure-demo/secure-demo.module').then(m => m.SecureDemoModule),
+    path: 'clinics',
+    loadChildren: () => import('./clinics/clinics.module').then(m => m.ClinicsModule),
     canActivate: [
       AngularFireAuthGuard
     ],
     data: {
       authGuardPipe: redirectUnauthorizedToLogin
     }
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    redirectTo: 'clinics'
   }
 ];
 

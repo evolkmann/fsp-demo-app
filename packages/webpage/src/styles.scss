@@ -12,3 +12,11 @@ body {
 router-outlet ~ * > .container {
   margin-top: 3rem;
 }
+
+a {
+  color: inherit;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
