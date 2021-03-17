@@ -1,3 +1,4 @@
 export enum FirebaseCollection {
-  CLINICS = 'clinics'
+  CLINICS = 'clinics',
+  EMPLOYEES = 'employees'
 }

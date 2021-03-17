@@ -1,10 +1,33 @@
 <div class="container" *ngIf="clinic | async as cl">
   <fsp-breadcrumbs base="Clinics" [id]="cl.id"></fsp-breadcrumbs>
   <div class="row">
-    <div class="col">
+    <div class="col-12">
       <h1>
         {{cl.name}}
       </h1>
+    </div>
+  </div>
+  <div class="row" *ngIf="(employees | async) as emps">
+    <div class="col-12 mb-3">
+      <h2>
+        Employees
+      </h2>
+      <button mat-stroked-button (click)="openCreateEmployeeDialog()">
+        New
+      </button>
+      <button mat-stroked-button *ngIf="selectedEmployees?.length" (click)="deleteEmployees()" class="ml-2">
+        Delete {{selectedEmployees?.length}} employee{{selectedEmployees?.length === 1 ? '' : 's'}}
+      </button>
+    </div>
+    <div class="col-12">
+      <mat-selection-list *ngIf="emps.length; else noEmployees" dense multiple (selectionChange)="onSelectionChange($event)">
+        <mat-list-option *ngFor="let emp of emps" [value]="emp.id">
+          {{emp.name}}
+        </mat-list-option>
+      </mat-selection-list>
+      <ng-template #noEmployees>
+        No employees are listed for this clinic.
+      </ng-template>
     </div>
   </div>
 </div>
