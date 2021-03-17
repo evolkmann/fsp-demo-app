@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MetaService } from '@ngx-meta/core';
 import { NEXT_URL_PARAM } from 'src/app/app-routing.module';
 
 @Component({
@@ -24,10 +25,12 @@ export class LoginComponent implements OnInit {
   constructor(
     private readonly auth: AngularFireAuth,
     private readonly router: Router,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly meta: MetaService
   ) { }
 
   ngOnInit(): void {
+    this.meta.setTitle('Login');
   }
 
   async login() {
