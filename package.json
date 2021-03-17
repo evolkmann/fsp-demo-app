@@ -1,0 +1,11 @@
+{
+  "name": "fsp-demo-app",
+  "private": true,
+  "scripts": {
+    "postinstall": "lerna bootstrap",
+    "start": "lerna run --parallel start"
+  },
+  "devDependencies": {
+    "lerna": "4.0.0"
+  }
+}

@@ -1,0 +1,9 @@
+**/node_modules
+**/dist
+.idea/
+lerna-debug.log
+.scannerwork
+**/.env
+.vscode/
+**/scully.log
+**/scully-routes.json
