@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { RouterModule } from '@angular/router';
-import { NgxMaterialDataTableModule } from 'ngx-material-data-table';
 import { MaterialModule } from '../material.module';
 import { NavigationModule } from '../navigation/navigation.module';
 import { ClinicsRoutingModule } from './clinics-routing.module';
@@ -23,7 +22,6 @@ import { OverviewComponent } from './views/overview/overview.component';
     ClinicsRoutingModule,
     AngularFirestoreModule,
     MaterialModule,
-    NgxMaterialDataTableModule,
     RouterModule,
     NavigationModule
   ]
