@@ -2,8 +2,10 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { take, tap } from 'rxjs/operators';
 import { FirebaseCollection } from 'src/app/firebase';
-import { Clinic } from '../../models/clinic.model';
+import { Clinic } from '../../../shared/models/clinic.model';
+import { Role } from '../../../shared/models/role.model';
 
 export interface CreateEmployeeDialogInput {
   clinic: AngularFirestoreDocument<Clinic>;
@@ -17,7 +19,8 @@ export interface CreateEmployeeDialogInput {
 export class CreateEmployeeDialogComponent implements OnInit {
 
   readonly form = new FormGroup({
-    name: new FormControl(null, Validators.required)
+    name: new FormControl(null, Validators.required),
+    email: new FormControl(null, Validators.email)
   })
 
   constructor(
@@ -32,11 +35,20 @@ export class CreateEmployeeDialogComponent implements OnInit {
 
   async submit() {
     this.form.markAsPending();
-    const ref = await this.firestore.collection(FirebaseCollection.EMPLOYEES).add({
-      ...this.form.value,
-      clinic: this.data.clinic.ref
-    });
-    this.dialogRef.close();
+    this.firestore.collection<Role>(FirebaseCollection.ROLES, ref => ref.where('defaultForClinic', '==', true)).valueChanges({
+      idField: 'id'
+    }).pipe(
+      take(1),
+      tap(async roles => {
+        const roleRef = this.firestore.doc(`${FirebaseCollection.ROLES}/${roles[0].id}`).ref;
+        const ref = await this.firestore.collection(FirebaseCollection.EMPLOYEES).add({
+          ...this.form.value,
+          role: roleRef,
+          clinic: this.data.clinic.ref
+        });
+        this.dialogRef.close();
+      }),
+    ).subscribe()
   }
 
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { FirebaseCollection } from 'src/app/firebase';
-import { Clinic } from '../../models/clinic.model';
+import { Clinic } from '../../../shared/models/clinic.model';
 
 @Component({
   selector: 'fsp-clinics-list',

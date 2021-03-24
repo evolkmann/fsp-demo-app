@@ -3,10 +3,15 @@
     <div class="row">
       <div class="col d-flex justify-content-between">
         <div>
-          fsp-demo-app
+          <a mat-button routerLink="/clinics">
+            Clinics
+          </a>
+          <a mat-button routerLink="/employees" class="ml-1">
+            Employees
+          </a>
         </div>
         <div>
-          <button mat-button *ngIf="(user | async) as usr; else notLoggedIn" [matMenuTriggerFor]="userMenu">
+          <button mat-button *ngIf="(userService.user | async) as usr; else notLoggedIn" [matMenuTriggerFor]="userMenu">
             {{usr.email}}
           </button>
           <ng-template #notLoggedIn>
@@ -21,6 +26,14 @@
 </mat-toolbar>
 
 <mat-menu #userMenu>
+  <button disabled mat-menu-item *ngIf="(userService.role) | async as rol; else noRole">
+    Your Role: {{rol.name}}
+  </button>
+  <ng-template #noRole>
+    <button disabled mat-menu-item>
+      No role assigned
+    </button>
+  </ng-template>
   <ng-template matMenuContent>
     <button mat-menu-item (click)="logout()">Sign Out</button>
   </ng-template>

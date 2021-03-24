@@ -1,21 +1,14 @@
-<h1 mat-dialog-title>Create Employee</h1>
+<h1 mat-dialog-title>Create Sales Rep</h1>
 <div mat-dialog-content>
   <span>
-    This will create a clinic employee who can only work for this clinic.<br>
-    To create a sales rep for all clinics, please navigate to the Employees view.
+    This will create a sales rep who can work in any clinic.<br>
+    To create a clinic-bound employee, please navigate to that clinic.
   </span>
 
   <form [formGroup]="form" (ngSubmit)="submit()" class="mt-4">
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Name</mat-label>
       <input matInput formControlName="name" autocomplete="off">
-    </mat-form-field>
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>E-Mail</mat-label>
-      <input matInput formControlName="email" type="email" autocomplete="off">
-      <mat-hint>
-        Add an email to allow this employee to log in.
-      </mat-hint>
     </mat-form-field>
     <button type="submit" #submitButton class="d-none"></button>
   </form>

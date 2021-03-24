@@ -3,8 +3,10 @@ import { NgModule } from '@angular/core';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { EmployeesModule } from '../employees/employees.module';
 import { MaterialModule } from '../material.module';
 import { NavigationModule } from '../navigation/navigation.module';
+import { SharedModule } from '../shared/shared.module';
 import { ClinicsRoutingModule } from './clinics-routing.module';
 import { ClinicCardComponent } from './components/clinic-card/clinic-card.component';
 import { ClinicsListComponent } from './components/clinics-list/clinics-list.component';
@@ -27,7 +29,9 @@ import { OverviewComponent } from './views/overview/overview.component';
     MaterialModule,
     RouterModule,
     NavigationModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule,
+    EmployeesModule
   ]
 })
 export class ClinicsModule { }

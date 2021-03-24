@@ -6,10 +6,11 @@ import { ActivatedRoute } from '@angular/router';
 import { MetaService } from '@ngx-meta/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
+import { UserService } from 'src/app/auth/services/user.service';
 import { FirebaseCollection } from 'src/app/firebase';
+import { Clinic } from '../../../shared/models/clinic.model';
+import { Employee } from '../../../shared/models/employee.model';
 import { CreateEmployeeDialogComponent, CreateEmployeeDialogInput } from '../../components/create-employee-dialog/create-employee-dialog.component';
-import { Clinic } from '../../models/clinic.model';
-import { Employee } from '../../models/employee.model';
 
 @Component({
   selector: 'fsp-clinic-detail',
@@ -28,7 +29,8 @@ export class ClinicDetailComponent implements OnInit {
     private readonly firestore: AngularFirestore,
     private readonly route: ActivatedRoute,
     private readonly meta: MetaService,
-    private readonly matDialog: MatDialog
+    private readonly matDialog: MatDialog,
+    public readonly user: UserService
   ) { }
 
   ngOnInit(): void {

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Clinic } from '../../models/clinic.model';
+import { Clinic } from '../../../shared/models/clinic.model';
 
 @Component({
   selector: 'fsp-clinic-card',

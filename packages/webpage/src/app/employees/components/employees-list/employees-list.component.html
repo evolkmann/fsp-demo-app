@@ -1,0 +1,13 @@
+<mat-selection-list *ngIf="employees?.length; else noEmployees" dense multiple (selectionChange)="selectionChange.emit($event)">
+  <mat-list-option *ngFor="let emp of employees" [value]="emp.id"
+    [class.font-weight-bold]="emp | employeeIsCurrentUser | async">
+    {{emp.name}}
+    <ng-container *ngIf="emp.email">
+      ({{emp.email}})
+    </ng-container>
+  </mat-list-option>
+</mat-selection-list>
+
+<ng-template #noEmployees>
+  No employees are listed.
+</ng-template>

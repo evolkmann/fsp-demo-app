@@ -1,17 +1,11 @@
-<div class="container" *ngIf="clinic | async as cl">
-  <fsp-breadcrumbs base="Clinics" [id]="cl.id"></fsp-breadcrumbs>
+<div class="container">
   <div class="row">
-    <div class="col-12">
-      <h1>
-        {{cl.name}}
-      </h1>
+    <div class="col">
+      <h1>Employees</h1>
     </div>
   </div>
-  <div class="row" *ngIf="(employees | async) as emps">
+  <div class="row">
     <div class="col-12 mb-3">
-      <h2>
-        Employees
-      </h2>
       <button mat-stroked-button (click)="openCreateEmployeeDialog()" [disabled]="!(user.isAdmin | async)">
         New
       </button>
@@ -19,8 +13,8 @@
         Delete {{selectedEmployees?.length}} employee{{selectedEmployees?.length === 1 ? '' : 's'}}
       </button>
     </div>
-    <div class="col-12">
-      <fsp-employees-list [employees]="emps" (selectionChange)="onSelectionChange($event)"></fsp-employees-list>
+    <div class="col">
+      <fsp-employees-list [employees]="$any(employees | async)" (selectionChange)="onSelectionChange($event)"></fsp-employees-list>
     </div>
   </div>
 </div>
