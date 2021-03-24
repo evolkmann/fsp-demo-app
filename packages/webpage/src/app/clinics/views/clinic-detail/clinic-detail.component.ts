@@ -7,7 +7,9 @@ import { MetaService } from '@ngx-meta/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { UserService } from 'src/app/auth/services/user.service';
+import { CreateEventDialogComponent, CreateEventInput } from 'src/app/events/components/create-event-dialog/create-event-dialog.component';
 import { FirebaseCollection } from 'src/app/firebase';
+import { Event } from 'src/app/shared/models/event.model';
 import { Clinic } from '../../../shared/models/clinic.model';
 import { Employee } from '../../../shared/models/employee.model';
 import { CreateEmployeeDialogComponent, CreateEmployeeDialogInput } from '../../components/create-employee-dialog/create-employee-dialog.component';
@@ -22,6 +24,7 @@ export class ClinicDetailComponent implements OnInit {
   clinic!: Observable<Clinic | undefined>;
   private readonly docRef = new BehaviorSubject<AngularFirestoreDocument<Clinic> | undefined>(undefined);
   employees!: Observable<Employee[]>;
+  events!: Observable<Event[]>;
 
   selectedEmployees: string[] = [];
 
@@ -51,6 +54,12 @@ export class ClinicDetailComponent implements OnInit {
         idField: 'id'
       }))
     );
+    this.events = this.docRef.pipe(
+      filter(ref => !!ref),
+      switchMap(doc => this.firestore.collection<Event>(FirebaseCollection.EVENTS, ref => ref.where('clinic', '==', doc!.ref)).valueChanges({
+        idField: 'id'
+      }))
+    );
   }
 
   openCreateEmployeeDialog() {
@@ -62,6 +71,19 @@ export class ClinicDetailComponent implements OnInit {
       minHeight: '200px',
       data: {
         clinic: this.docRef.value!
+      }
+    });
+  }
+
+  openCreateEventDialog() {
+    this.matDialog.open<
+      CreateEventDialogComponent,
+      CreateEventInput
+    >(CreateEventDialogComponent, {
+      minWidth: '50%',
+      minHeight: '200px',
+      data: {
+        clinic: this.route.snapshot.params.id
       }
     });
   }

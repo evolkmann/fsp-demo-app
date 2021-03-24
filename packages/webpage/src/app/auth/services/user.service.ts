@@ -13,7 +13,7 @@ import { Role } from 'src/app/shared/models/role.model';
 export class UserService {
 
   readonly user!: Observable<firebase.default.User | null>;
-  readonly employee?: Observable<Employee>;
+  readonly employee!: Observable<Employee>;
   readonly role?: Observable<Role | undefined>;
   readonly isAdmin: Observable<boolean>;
 
@@ -23,7 +23,9 @@ export class UserService {
   ) {
     this.user = this.auth.user;
     this.employee = this.user.pipe(
-      switchMap(user => this.firestore.collection<Employee>(FirebaseCollection.EMPLOYEES, ref => ref.where('email', '==', user?.email)).valueChanges()),
+      switchMap(user => this.firestore.collection<Employee>(FirebaseCollection.EMPLOYEES, ref => ref.where('email', '==', user?.email)).valueChanges({
+        idField: 'id'
+      })),
       map(e => e[0])
     );
     this.role = this.employee.pipe(

@@ -1,0 +1,53 @@
+<div class="container" *ngIf="event | async as evt">
+  <fsp-breadcrumbs base="Events" [id]="evt.id!"></fsp-breadcrumbs>
+  <div class="row">
+    <div class="col-12">
+      <h1>
+        Event
+      </h1>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Timestamp</mat-label>
+        <input matInput [value]="evt.timestamp | timestamp" disabled>
+      </mat-form-field>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Created By</mat-label>
+        <input matInput [value]="evt.employee | employeeName | async" disabled>
+      </mat-form-field>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Clinic</mat-label>
+        <input matInput [value]="evt.clinic | clinicName | async" disabled>
+        <a mat-icon-button matSuffix [routerLink]="['/clinics', evt.clinic.id]">
+          <mat-icon>
+            arrow_forward
+          </mat-icon>
+        </a>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <table mat-table [dataSource]="evt.payload" class="w-100">
+
+        <ng-container matColumnDef="field">
+          <th mat-header-cell *matHeaderCellDef> Field </th>
+          <td mat-cell *matCellDef="let element"> {{element.field}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="value">
+          <th mat-header-cell *matHeaderCellDef> Value </th>
+          <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+</div>

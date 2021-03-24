@@ -46,6 +46,16 @@ const routes: Routes = [
     }
   },
   {
+    path: 'events',
+    loadChildren: () => import('./events/events.module').then(m => m.EventsModule),
+    canActivate: [
+      AngularFireAuthGuard
+    ],
+    data: {
+      authGuardPipe: redirectUnauthorizedToLogin
+    }
+  },
+  {
     path: '**',
     pathMatch: 'full',
     redirectTo: 'clinics'

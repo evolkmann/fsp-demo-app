@@ -4,6 +4,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { EmployeesModule } from '../employees/employees.module';
+import { EventsModule } from '../events/events.module';
 import { MaterialModule } from '../material.module';
 import { NavigationModule } from '../navigation/navigation.module';
 import { SharedModule } from '../shared/shared.module';
@@ -31,7 +32,8 @@ import { OverviewComponent } from './views/overview/overview.component';
     NavigationModule,
     ReactiveFormsModule,
     SharedModule,
-    EmployeesModule
+    EmployeesModule,
+    EventsModule
   ]
 })
 export class ClinicsModule { }

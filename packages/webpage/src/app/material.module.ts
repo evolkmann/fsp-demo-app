@@ -8,7 +8,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const modules = [
   MatButtonModule,
@@ -20,7 +22,9 @@ const modules = [
   MatListModule,
   MatMenuModule,
   MatSelectModule,
+  MatTableModule,
   MatToolbarModule,
+  MatTooltipModule,
 ];
 
 @NgModule({

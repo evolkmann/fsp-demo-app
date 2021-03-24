@@ -7,6 +7,19 @@
       </h1>
     </div>
   </div>
+  <div class="row mb-5">
+    <div class="col mb-3">
+      <h2>
+        Events
+      </h2>
+      <button mat-stroked-button (click)="openCreateEventDialog()" [disabled]="!(user.isAdmin | async)">
+        New
+      </button>
+    </div>
+    <div class="col-12">
+      <fsp-events-list [events]="$any(events | async)"></fsp-events-list>
+    </div>
+  </div>
   <div class="row" *ngIf="(employees | async) as emps">
     <div class="col-12 mb-3">
       <h2>

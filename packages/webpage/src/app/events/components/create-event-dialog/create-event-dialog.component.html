@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Create Event</h1>
+
+<div mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="submit()" class="mt-4">
+    <div>
+      <div *ngFor="let group of $any(this.form.get('payload')).controls; index as i">
+        <mat-form-field>
+          <mat-label>Field</mat-label>
+          <input matInput [formControl]="group.get('field')" autocomplete="off">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Value</mat-label>
+          <input matInput [formControl]="group.get('value')" autocomplete="off">
+        </mat-form-field>
+      </div>
+    </div>
+    <button type="submit" #submitButton class="d-none"></button>
+  </form>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="addRow()">
+    Add Value
+  </button>
+  <button mat-button (click)="submitButton.click()" [disabled]="form.invalid || form.pending">
+    Submit
+  </button>
+</div>

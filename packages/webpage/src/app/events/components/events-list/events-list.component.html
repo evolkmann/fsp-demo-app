@@ -1,0 +1,28 @@
+<mat-list *ngIf="events?.length; else noEvents" dense>
+  <mat-list-item *ngFor="let evt of events">
+    <div class="d-flex justify-content-between w-100">
+      <span>
+        <span class="font-weight-bold">
+          {{evt.id}}
+        </span>
+        from
+        <span class="font-weight-bold">
+          {{evt.employee | employeeName | async}}
+        </span>
+        on
+        <span class="font-weight-bold">
+          {{evt.timestamp | timestamp}}
+        </span>
+      </span>
+      <a mat-icon-button [routerLink]="['/events', evt.id]" matTooltip="View Details" matTooltipShowDelay="300">
+        <mat-icon>
+          arrow_forward
+        </mat-icon>
+      </a>
+    </div>
+  </mat-list-item>
+</mat-list>
+
+<ng-template #noEvents>
+  No events are listed.
+</ng-template>
