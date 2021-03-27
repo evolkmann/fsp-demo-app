@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FirebaseCollection } from 'src/app/firebase';
 import { Clinic } from 'src/app/shared/models/clinic.model';
-import { Event } from 'src/app/shared/models/event.model';
+import { Event, EventField } from 'src/app/shared/models/event.model';
 
 @Component({
   selector: 'fsp-visualisation',
@@ -19,9 +19,9 @@ export class VisualisationComponent implements OnInit {
 
   events!: Observable<Event[]>;
 
-  field!: string;
   clinicId!: string;
-  groupBy?: string;
+  field!: EventField;
+  groupBy?: EventField;
 
   lineChartOptions: (ChartOptions & { annotation?: any }) = {
     responsive: true,
