@@ -12,6 +12,9 @@
       <h2>
         Events
       </h2>
+      <button *ngIf="(events | async)?.length" mat-stroked-button [matMenuTriggerFor]="visualisationMenu" [matMenuTriggerData]="{ clinic: cl.id }" class="mr-2">
+        Visualise
+      </button>
       <button mat-stroked-button (click)="openCreateEventDialog()" [disabled]="!(user.isAdmin | async)">
         New
       </button>
@@ -37,3 +40,21 @@
     </div>
   </div>
 </div>
+
+<mat-menu #visualisationMenu>
+  <ng-template matMenuContent let-clinic="clinic">
+    <a *ngIf="events | async | anyEventsWithField : eventFields.WEIGHT" mat-menu-item routerLink="/events/visualise" [queryParams]="{
+      clinic: clinic,
+      field: eventFields.WEIGHT,
+      groupBy: eventFields.PATIENT
+    }">
+      Patient Weight
+    </a>
+    <a *ngIf="events | async | anyEventsWithField : eventFields.COVID_19_CASES" mat-menu-item routerLink="/events/visualise" [queryParams]="{
+      clinic: clinic,
+      field: eventFields.COVID_19_CASES
+    }">
+      COVID-19 Cases
+    </a>
+  </ng-template>
+</mat-menu>

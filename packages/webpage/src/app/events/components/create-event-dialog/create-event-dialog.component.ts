@@ -8,7 +8,7 @@ import { UserService } from 'src/app/auth/services/user.service';
 import { FirebaseCollection } from 'src/app/firebase';
 import { Clinic } from 'src/app/shared/models/clinic.model';
 import { Employee } from 'src/app/shared/models/employee.model';
-import { Event } from 'src/app/shared/models/event.model';
+import { Event, EventField } from 'src/app/shared/models/event.model';
 
 export interface CreateEventInput {
   clinic: string;
@@ -21,6 +21,7 @@ export interface CreateEventInput {
 })
 export class CreateEventDialogComponent implements OnInit {
 
+  readonly fields = Object.values(EventField);
   readonly form = new FormGroup({
     employee: new FormControl(null),
     clinic: new FormControl(this.data.clinic, Validators.required),

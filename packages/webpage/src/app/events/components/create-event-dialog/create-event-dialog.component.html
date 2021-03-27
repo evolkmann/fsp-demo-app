@@ -10,7 +10,11 @@
       <div class="col-12 col-sm-6">
         <mat-form-field appearance="fill" class="w-100">
           <mat-label>Field</mat-label>
-          <input matInput [formControl]="group.get('field')" autocomplete="off">
+          <mat-select [formControl]="group.get('field')">
+            <mat-option *ngFor="let field of fields" [value]="field">
+              {{field}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
       <div class="col-12 col-sm-6">

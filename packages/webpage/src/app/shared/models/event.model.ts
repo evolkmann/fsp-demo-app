@@ -2,8 +2,14 @@ import { DocumentReference } from '@angular/fire/firestore';
 import { Clinic } from './clinic.model';
 import { Employee } from './employee.model';
 
+export enum EventField {
+  WEIGHT = 'weight',
+  PATIENT = 'patient',
+  COVID_19_CASES = 'covid19-cases'
+}
+
 interface EventPayload {
-  field: string;
+  field: EventField;
   value: any;
 }
 

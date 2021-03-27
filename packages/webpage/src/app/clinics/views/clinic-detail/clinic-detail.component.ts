@@ -9,7 +9,7 @@ import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { UserService } from 'src/app/auth/services/user.service';
 import { CreateEventDialogComponent, CreateEventInput } from 'src/app/events/components/create-event-dialog/create-event-dialog.component';
 import { FirebaseCollection } from 'src/app/firebase';
-import { Event } from 'src/app/shared/models/event.model';
+import { Event, EventField } from 'src/app/shared/models/event.model';
 import { Clinic } from '../../../shared/models/clinic.model';
 import { Employee } from '../../../shared/models/employee.model';
 import { CreateEmployeeDialogComponent, CreateEmployeeDialogInput } from '../../components/create-employee-dialog/create-employee-dialog.component';
@@ -25,6 +25,7 @@ export class ClinicDetailComponent implements OnInit {
   private readonly docRef = new BehaviorSubject<AngularFirestoreDocument<Clinic> | undefined>(undefined);
   employees!: Observable<Employee[]>;
   events!: Observable<Event[]>;
+  readonly eventFields = EventField;
 
   selectedEmployees: string[] = [];
 

@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1>Event Visualisation</h1>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Clinic</mat-label>
+        <input matInput [value]="clinicId | clinicName | async" disabled>
+        <a mat-icon-button matSuffix [routerLink]="['/clinics', clinicId]">
+          <mat-icon>
+            arrow_forward
+          </mat-icon>
+        </a>
+      </mat-form-field>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Field</mat-label>
+        <input matInput [value]="field" disabled>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <canvas baseChart width="400" height="200"
+        [datasets]="events | async | eventToLineChartData : field : groupBy"
+        [labels]="events | async | eventToLineChartLabels"
+        [options]="lineChartOptions"
+        [colors]="lineChartColors"
+        [legend]="lineChartLegend"
+        [chartType]="lineChartType">
+      </canvas>
+    </div>
+  </div>
+</div>

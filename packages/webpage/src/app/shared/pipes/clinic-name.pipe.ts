@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DocumentReference } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { FirebaseCollection } from 'src/app/firebase';
 import { Clinic } from '../models/clinic.model';
 
 @Pipe({
@@ -9,10 +10,22 @@ import { Clinic } from '../models/clinic.model';
 })
 export class ClinicNamePipe implements PipeTransform {
 
-  transform(clinic: DocumentReference<Clinic>): Observable<string | undefined> {
-    return from(clinic.get()).pipe(
+  constructor(
+    private readonly firestore: AngularFirestore
+  ) {}
+
+  transform(clinic: string | DocumentReference<Clinic>): Observable<string | undefined> {
+    let docRef: DocumentReference<Clinic>;
+
+    if (typeof clinic === 'string') {
+      docRef = this.firestore.doc<Clinic>(`${FirebaseCollection.CLINICS}/${clinic}`).ref;
+    } else {
+      docRef = clinic;
+    }
+
+    return from(docRef.get()).pipe(
       map(cl => cl.data()?.name)
-    )
+    );
   }
 
 }
