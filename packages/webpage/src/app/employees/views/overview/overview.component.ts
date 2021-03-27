@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { UserService } from 'src/app/auth/services/user.service';
 import { FirebaseCollection } from 'src/app/firebase';
 import { Employee } from 'src/app/shared/models/employee.model';
-import { CreateSalesRepEmployeeDialogComponent } from '../../components/create-sales-rep-employee-dialog/create-sales-rep-employee-dialog.component';
+import { CreateEmployeeDialogComponent, CreateEmployeeInput } from '../../components/create-employee-dialog/create-employee-dialog.component';
 
 @Component({
   selector: 'fsp-overview',
@@ -30,16 +30,20 @@ export class OverviewComponent implements OnInit {
   ngOnInit(): void {
     this.meta.setTitle('Employees');
     this.employees = this.firestore.collection<Employee>(FirebaseCollection.EMPLOYEES).valueChanges({
-      ifField: 'id'
+      idField: 'id'
     });
   }
 
   openCreateEmployeeDialog() {
     this.matDialog.open<
-      CreateSalesRepEmployeeDialogComponent
-    >(CreateSalesRepEmployeeDialogComponent, {
+      CreateEmployeeDialogComponent,
+      CreateEmployeeInput
+    >(CreateEmployeeDialogComponent, {
       minWidth: '50%',
-      minHeight: '200px'
+      minHeight: '200px',
+      data: {
+        mode: 'sales-rep'
+      }
     });
   }
 

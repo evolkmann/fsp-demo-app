@@ -11,7 +11,6 @@ import { SharedModule } from '../shared/shared.module';
 import { ClinicsRoutingModule } from './clinics-routing.module';
 import { ClinicCardComponent } from './components/clinic-card/clinic-card.component';
 import { ClinicsListComponent } from './components/clinics-list/clinics-list.component';
-import { CreateEmployeeDialogComponent } from './components/create-employee-dialog/create-employee-dialog.component';
 import { ClinicDetailComponent } from './views/clinic-detail/clinic-detail.component';
 import { OverviewComponent } from './views/overview/overview.component';
 
@@ -21,7 +20,6 @@ import { OverviewComponent } from './views/overview/overview.component';
     ClinicsListComponent,
     ClinicCardComponent,
     ClinicDetailComponent,
-    CreateEmployeeDialogComponent,
   ],
   imports: [
     CommonModule,

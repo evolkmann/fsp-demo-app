@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
 import { SharedModule } from '../shared/shared.module';
-import { CreateSalesRepEmployeeDialogComponent } from './components/create-sales-rep-employee-dialog/create-sales-rep-employee-dialog.component';
+import { CreateEmployeeDialogComponent } from './components/create-employee-dialog/create-employee-dialog.component';
 import { EmployeesListComponent } from './components/employees-list/employees-list.component';
 import { EmployeesRoutingModule } from './employees-routing.module';
 import { OverviewComponent } from './views/overview/overview.component';
@@ -12,7 +12,7 @@ import { OverviewComponent } from './views/overview/overview.component';
   declarations: [
     OverviewComponent,
     EmployeesListComponent,
-    CreateSalesRepEmployeeDialogComponent
+    CreateEmployeeDialogComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +22,8 @@ import { OverviewComponent } from './views/overview/overview.component';
     ReactiveFormsModule
   ],
   exports: [
-    EmployeesListComponent
+    EmployeesListComponent,
+    CreateEmployeeDialogComponent
   ]
 })
 export class EmployeesModule { }

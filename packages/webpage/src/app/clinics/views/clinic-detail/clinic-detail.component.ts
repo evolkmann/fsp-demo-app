@@ -8,13 +8,13 @@ import { parse } from 'json2csv';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { UserService } from 'src/app/auth/services/user.service';
+import { CreateEmployeeDialogComponent, CreateEmployeeInput } from 'src/app/employees/components/create-employee-dialog/create-employee-dialog.component';
 import { CreateEventDialogComponent, CreateEventInput } from 'src/app/events/components/create-event-dialog/create-event-dialog.component';
 import { FirebaseCollection } from 'src/app/firebase';
 import { Event, EventField } from 'src/app/shared/models/event.model';
 import { Clinic } from '../../../shared/models/clinic.model';
 import { Employee } from '../../../shared/models/employee.model';
 import { download } from '../../../utils';
-import { CreateEmployeeDialogComponent, CreateEmployeeDialogInput } from '../../components/create-employee-dialog/create-employee-dialog.component';
 
 @Component({
   selector: 'fsp-clinic-detail',
@@ -68,11 +68,12 @@ export class ClinicDetailComponent implements OnInit {
   openCreateEmployeeDialog() {
     this.matDialog.open<
       CreateEmployeeDialogComponent,
-      CreateEmployeeDialogInput
+      CreateEmployeeInput
     >(CreateEmployeeDialogComponent, {
       minWidth: '50%',
       minHeight: '200px',
       data: {
+        mode: 'clinic',
         clinic: this.docRef.value!
       }
     });
