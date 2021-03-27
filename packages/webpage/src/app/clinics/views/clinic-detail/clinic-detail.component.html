@@ -12,9 +12,14 @@
       <h2>
         Events
       </h2>
-      <button *ngIf="(events | async)?.length" mat-stroked-button [matMenuTriggerFor]="visualisationMenu" [matMenuTriggerData]="{ clinic: cl.id }" class="mr-2">
-        Visualise
-      </button>
+      <ng-container *ngIf="(events | async)?.length">
+        <button mat-stroked-button [matMenuTriggerFor]="visualisationMenu" [matMenuTriggerData]="{ clinic: cl.id }" class="mr-2">
+          Visualise
+        </button>
+        <button mat-stroked-button [matMenuTriggerFor]="exportMenu" [matMenuTriggerData]="{ events: (events | async) }" class="mr-2">
+          Export
+        </button>
+      </ng-container>
       <button mat-stroked-button (click)="openCreateEventDialog()" [disabled]="!(user.isAdmin | async)">
         New
       </button>
@@ -56,5 +61,13 @@
     }">
       COVID-19 Cases
     </a>
+  </ng-template>
+</mat-menu>
+
+<mat-menu #exportMenu>
+  <ng-template matMenuContent let-events="events">
+    <button mat-menu-item (click)="convertToCsvAndDownload(events)">
+      CSV
+    </button>
   </ng-template>
 </mat-menu>

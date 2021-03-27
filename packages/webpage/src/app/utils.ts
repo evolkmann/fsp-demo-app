@@ -10,3 +10,19 @@ export const groupBy = <T>(arr: T[], fn: (v: T) => any): {
       acc[val] = (acc[val] || []).concat(arr[i]);
       return acc;
     }, {});
+
+/**
+ * https://stackoverflow.com/a/18197341
+ */
+export function download(filename: string, content: string, mimeType: string) {
+  const element = document.createElement('a');
+  element.setAttribute('href', `data:${mimeType};charset=utf-8,${encodeURIComponent(content)}`);
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
