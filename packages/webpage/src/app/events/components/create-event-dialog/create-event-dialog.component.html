@@ -1,20 +1,30 @@
 <h1 mat-dialog-title>Create Event</h1>
 
 <div mat-dialog-content>
+  <span>
+    An event consists of key-value-pairs.
+  </span>
+
   <form [formGroup]="form" (ngSubmit)="submit()" class="mt-4">
-    <div>
-      <div *ngFor="let group of $any(this.form.get('payload')).controls; index as i">
-        <mat-form-field>
+    <div class="row" *ngFor="let group of $any(this.form.get('payload')).controls; index as i">
+      <div class="col-12 col-sm-6">
+        <mat-form-field appearance="fill" class="w-100">
           <mat-label>Field</mat-label>
           <input matInput [formControl]="group.get('field')" autocomplete="off">
         </mat-form-field>
-        <mat-form-field>
+      </div>
+      <div class="col-12 col-sm-6">
+        <mat-form-field appearance="fill" class="w-100">
           <mat-label>Value</mat-label>
           <input matInput [formControl]="group.get('value')" autocomplete="off">
         </mat-form-field>
       </div>
     </div>
     <button type="submit" #submitButton class="d-none"></button>
+
+    <div class="alert alert-danger" *ngIf="form.get('payload')!.hasError('fieldNamesMustBeUnique')">
+      All field names within an event must be unique!
+    </div>
   </form>
 </div>
 

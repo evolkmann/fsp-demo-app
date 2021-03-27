@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import firebase from 'firebase';
 import { switchMap } from 'rxjs/operators';
@@ -24,7 +24,11 @@ export class CreateEventDialogComponent implements OnInit {
   readonly form = new FormGroup({
     employee: new FormControl(null),
     clinic: new FormControl(this.data.clinic, Validators.required),
-    payload: new FormArray([])
+    payload: new FormArray([], {
+      validators: [
+        this.uniquePayloadKeysValidator.bind(this)
+      ]
+    })
   })
 
   constructor(
@@ -60,6 +64,22 @@ export class CreateEventDialogComponent implements OnInit {
         value: new FormControl(null, Validators.required)
       })
     );
+  }
+
+  private uniquePayloadKeysValidator(ctrl: AbstractControl): ValidationErrors | null {
+    const arr = ctrl as FormArray;
+    if (arr.length < 2) {
+      return null;
+    }
+
+    const val = arr.value as {
+      field: string;
+      value: any;
+    }[];
+    const set = new Set(val.map(v => v.field));
+    return set.size === val.length ? null : {
+      fieldNamesMustBeUnique: true
+    };
   }
 
 }
