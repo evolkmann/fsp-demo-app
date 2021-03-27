@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/evolkmann/fsp-demo-app/compare/v0.1.0...v0.2.0) (2021-03-27)
+
+
+### Features
+
+* **events:** add event visualisation ([d622658](https://github.com/evolkmann/fsp-demo-app/commit/d6226588fdca8db45c4374f3e9d07160b10b2ea6))
+* **events:** all keys must be unique ([f1bd703](https://github.com/evolkmann/fsp-demo-app/commit/f1bd703a1c861e71e249483a997383dc548a4635))
+
+
+
+
+
 # 0.1.0 (2021-03-27)
 
 
