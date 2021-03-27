@@ -8,6 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class FooterComponent implements OnInit {
 
   year = new Date().getFullYear();
+  /**
+   * When changing the following line, please also update
+   * the `Jenkinsfile`!
+   *
+   * @see [Commit](https://github.com/evolkmann/fsp-demo-app/commit/c7ccddb90d40f979b71af72cae47ebcfb5353a1e)
+   */
   version?: string;
 
   constructor() { }
