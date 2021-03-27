@@ -80,6 +80,11 @@ pipeline {
 
           steps {
             sh script: """
+              sed \
+                's+version?: string+version = "$TAG_NAME"+' \
+                packages/webpage/src/app/navigation/components/footer/footer.component.ts
+            """, label: "Substitute Git Tag into Footer"
+            sh script: """
               docker build \
                 --no-cache \
                 --build-arg HOSTING_DOMAIN=$WEBPAGE_HOSTING_DOMAIN \

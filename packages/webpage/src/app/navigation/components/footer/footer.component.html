@@ -13,4 +13,9 @@
       Source
     </a>
   </div>
+  <div *ngIf="version">
+    <a [href]="'https://github.com/evolkmann/fsp-demo-app/releases/tag/' + version!" target="_blank" rel="noopener nofollow">
+      {{version}}
+    </a>
+  </div>
 </footer>
