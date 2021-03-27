@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/evolkmann/fsp-demo-app/compare/v0.2.0...v0.3.0) (2021-03-27)
+
+
+### Features
+
+* **events:** add csv export ([162d38e](https://github.com/evolkmann/fsp-demo-app/commit/162d38e763b64face177736ccdd66021f188568d))
+
+
+
+
+
 # [0.2.0](https://github.com/evolkmann/fsp-demo-app/compare/v0.1.0...v0.2.0) (2021-03-27)
 
 
