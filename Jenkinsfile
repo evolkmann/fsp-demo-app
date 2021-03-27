@@ -80,7 +80,7 @@ pipeline {
 
           steps {
             sh script: """
-              sed \
+              sed -i \
                 's+version?: string+version = "$TAG_NAME"+' \
                 packages/webpage/src/app/navigation/components/footer/footer.component.ts
             """, label: "Substitute Git Tag into Footer"
