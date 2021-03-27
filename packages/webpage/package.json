@@ -22,7 +22,7 @@
     "@ngx-meta/core": "9.0.0",
     "bootstrap": "4.6.0",
     "chart.js": "2.9.4",
-    "firebase": "8.3.0",
+    "firebase": "8.3.1",
     "json2csv": "5.0.6",
     "ng2-charts": "2.4.2",
     "rxjs": "6.6.6",
